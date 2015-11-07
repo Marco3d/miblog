@@ -16,7 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return "Hola desde el index del administrador";
+        return view('admin.users.index');
     }
 
     /**
