@@ -145,7 +145,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+      /*los providers del proyecto*/
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
 
     ],
@@ -196,6 +198,11 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        /*los alias de mi proyecto*/
+
+         'Form' => Collective\Html\FormFacade::class,
+         'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
