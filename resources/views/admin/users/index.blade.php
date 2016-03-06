@@ -32,8 +32,8 @@
   		<td>{{$user->name}}</td>
   		<td>{{$user->email}}</td>
   		<td>{{$user->type}}</td>
-  		<td><a class="btn btn-success" href="#" role="button"><i class="fa fa-pencil-square-o"></i></a>
-  		    <a class="btn btn-danger" href="#" role="button"><i class="fa fa-trash-o"></i></a>
+  		<td><a class="btn btn-success" href="{{route('admin.users.edit', $user->id)}}" role="button"><i class="fa fa-pencil-square-o"></i></a>
+  		    <a class="btn btn-danger" href="{{route('admin.users.destroy', $user->id)}}" onclick="return confirm('Quiere borrar el registro?')" role="button"><i class="fa fa-trash-o"></i></a>
   		</td>
 
   	</tr>

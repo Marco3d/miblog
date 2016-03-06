@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Session;
 use Redirect;
+use App\http\Requests\UserRequest;
 
 
 class UsersController extends Controller
@@ -40,7 +41,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
@@ -70,7 +71,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user= User::find($id);
+       return view('admin.users.edit',compact('user'));
+
     }
 
     /**
@@ -82,7 +85,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $user= User::find($id);
+         $user->fill($request->all());
+         $user->save();
+
+         Session::flash('message','Usuario actualizado correctamente');
+        return redirect::to('admin/users');
+
+
+         
     }
 
     /**
@@ -93,6 +104,12 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $user= User::find($id);
+        $user->delete();
+
+      Session::flash('message','Usuario eliminado correctamente');
+        return redirect::to('admin/users');
+
     }
 }
