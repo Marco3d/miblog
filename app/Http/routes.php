@@ -34,4 +34,13 @@ Route::get('categories/{id}/destroy',[
 
 	]);
 
+Route::resource('login','LoginController');
+
+
+Route::get('logout',[
+	'uses' => 'LoginController@logout',
+	'as'   => 'logout'
+	]);
+
+
 

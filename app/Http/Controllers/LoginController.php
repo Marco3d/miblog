@@ -1,13 +1,16 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\User;
+use Auth;
 use Session;
 use Redirect;
-use App\http\Requests\UserRequest;
-class UsersController extends Controller
+use App\Http\Requests;
+use App\Http\Requests\LoginRequest;
+use App\Http\Controllers\Controller;
+
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +19,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id','DESC')->paginate(5);
-        return view('admin.users.index', compact('users'));
+        return view('admin.login');
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,22 +29,25 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        //
     }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(loginRequest $request)
     {
-        $user = new User($request->all());
-        $user->password = bcrypt($request->password);
-        $user->save();
-        Session::flash('message','Usuario creado correctamente');
-        return redirect::to('admin/users');
+        if (Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])) {
+            return Redirect::to('admin/users');
+          }  
+
+        Session::flash('message','Los datos no corresponden al usuario');
+        return redirect::to('login');
     }
+
     /**
      * Display the specified resource.
      *
@@ -52,6 +58,7 @@ class UsersController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,9 +67,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user= User::find($id);
-       return view('admin.users.edit',compact('user'));
+        //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -72,13 +79,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $user= User::find($id);
-         $user->fill($request->all());
-         $user->save();
-         Session::flash('message','Usuario actualizado correctamente');
-        return redirect::to('admin/users');
-         
+        //
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -87,10 +90,13 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        
-        $user= User::find($id);
-        $user->delete();
-      Session::flash('message','Usuario eliminado correctamente');
-        return redirect::to('admin/users');
+        //
+    }
+
+
+
+    public function logout(){
+        Auth::logout();
+        return Redirect::to('login');
     }
 }
