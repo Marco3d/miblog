@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+
+Route::get('/',[
+	'uses' => 'FrontController@index',
+	'as'   => 'home'
+	]);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    
