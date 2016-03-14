@@ -41,7 +41,7 @@ class LoginController extends Controller
     public function store(loginRequest $request)
     {
         if (Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])) {
-            return Redirect::to('admin/users');
+            return Redirect::to('admin/index');
           }  
 
         Session::flash('message','Los datos no corresponden al usuario');

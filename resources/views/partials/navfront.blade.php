@@ -18,7 +18,7 @@
         <li><a href="{{route('home')}}">Inicio</a></li>
         <li><a href="#">Contacto</a></li>
         <li><a href="#">Categorias</a></li>
-        <li><a href="#">Administrador</a></li>
+        <li><a href="{{route('administrador')}}">Administrador</a></li>
         
       </ul>
       
