@@ -41,7 +41,7 @@
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articulos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Listar</a></li>
+            <li><a href="{{route('admin.articles.index')}}">Listar</a></li>
             <li><a href="#">Crear</a></li>
             
           </ul>

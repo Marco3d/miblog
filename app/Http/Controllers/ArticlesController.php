@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use Session;
-use Redirect;
-use App\Http\Requests;
-use App\Http\Requests\LoginRequest;
-use App\Http\Controllers\Controller;
 
-class LoginController extends Controller
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Article;
+use App\User;
+
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +18,8 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('admin.login');
+       $articles = Article::orderBy('id','DESC')->paginate(5);
+        return view('admin.articles.index', compact('articles'));
     }
 
     /**
@@ -38,14 +38,9 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(loginRequest $request)
+    public function store(Request $request)
     {
-        if (Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])) {
-            return Redirect::to('admin/index');
-          }  
-
-        Session::flash('message','Los datos no corresponden al usuario');
-        return redirect::to('login');
+        //
     }
 
     /**
@@ -91,12 +86,5 @@ class LoginController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-
-    public function logout(){
-        Auth::logout();
-        return Redirect::to('/');
     }
 }

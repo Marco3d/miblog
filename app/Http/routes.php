@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    
    Route::resource('users', 'UsersController');
    Route::resource('categories', 'CategoriesController');
+   Route::resource('articles', 'ArticlesController');
    Route::get('index',[
 	'uses' => 'FrontController@admin',
 	'as'   => 'administrador'
