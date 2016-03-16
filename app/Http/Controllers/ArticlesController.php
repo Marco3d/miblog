@@ -1,13 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
 use App\User;
+use App\Category;
+use Session;
+use Redirect;
+
+
 
 class ArticlesController extends Controller
 {
@@ -21,7 +23,6 @@ class ArticlesController extends Controller
        $articles = Article::orderBy('id','DESC')->paginate(5);
         return view('admin.articles.index', compact('articles'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -29,9 +30,9 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::lists('name','id');
+        return view('admin.articles.create',compact('categories'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,9 +41,12 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $article = new Article($request->all());
+        
+        $article->save();
+        Session::flash('message','Artículo fue creado correctamente');
+        return redirect::to('admin/articles');
     }
-
     /**
      * Display the specified resource.
      *
@@ -53,7 +57,6 @@ class ArticlesController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -64,7 +67,6 @@ class ArticlesController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -76,7 +78,6 @@ class ArticlesController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

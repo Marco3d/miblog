@@ -37,9 +37,9 @@
       <td>{{$article->user->name}}</td>
       <td>{{$article->category->name}}</td>
       @if(empty($article->path))
-      <td><img src="{{asset('images')}}/no-imagen.jpg"  style ="width: 100px;" ><td>
+      <td><img src="{{asset('images')}}/no-imagen.jpg"  style ="width: 100px"></td>
       @else
-      <td><img src="{{asset('images')}}/{{$article->path}}"  style ="width: 100px;" ></td>
+      <td><img src="{{asset('images')}}/{{$article->path}}"  style ="width: 100px"></td>
       @endif
       
   		<td><a class="btn btn-success" href="{{route('admin.articles.edit', $article->id)}}" role="button"><i class="fa fa-pencil-square-o"></i></a>
