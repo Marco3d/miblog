@@ -8,11 +8,14 @@ use App\User;
 use App\Category;
 use Session;
 use Redirect;
-
+use Auth;
 
 
 class ArticlesController extends Controller
 {
+
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +68,13 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+         $users = User::lists('name', 'id');
+         $categories =Category::lists('name', 'id');
+
+
+         $article = Article::find($id);
+        
+         return view('admin.articles.edit',compact('users','categories','article'));
     }
     /**
      * Update the specified resource in storage.
@@ -76,7 +85,12 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::find($id);
+        $article->  fill($request->all());
+             
+        $article->save();
+        Session::flash('message','Articulo editado Correctamente');
+        return redirect::to('admin/articles') ;
     }
     /**
      * Remove the specified resource from storage.
@@ -86,6 +100,8 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Article::destroy($id);
+         Session::flash('message','Articulo eliminado Correctamente');
+         return redirect::to('admin/articles') ;
     }
 }

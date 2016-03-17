@@ -45,6 +45,11 @@ Route::get('categories/{id}/destroy',[
 
 	]);
 
+Route::get('articles/{id}/destroy',[
+			'uses' => 'ArticlesController@destroy',
+			'as'   => 'admin.articles.destroy'	
+		]);
+
 Route::resource('login','LoginController');
 
 

@@ -9,6 +9,8 @@ use Redirect;
 use App\http\Requests\UserRequest;
 class UsersController extends Controller
 {
+
+     
     /**
      * Display a listing of the resource.
      *
