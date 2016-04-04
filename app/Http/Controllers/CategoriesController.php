@@ -12,7 +12,10 @@ use Redirect;
 
 class CategoriesController extends Controller
 {
-     
+      public function __construct(){
+       $this->middleware('auth');
+       $this->middleware('admin', ['only' =>['edit','update','destroy','create']]);
+    }
     /**
      * Display a listing of the resource.
      *
