@@ -50,6 +50,7 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
        $article = new Article($request->all());
+
         
         $article->save();
         Session::flash('message','Artículo fue creado correctamente');
@@ -92,6 +93,9 @@ class ArticlesController extends Controller
     {
         $article = Article::find($id);
         $article->  fill($request->all());
+        $article->resluggify();
+
+
              
         $article->save();
         Session::flash('message','Articulo editado Correctamente');

@@ -12,7 +12,7 @@ class Article extends Model implements SluggableInterface
     ];
      protected $table = "articles";
     
-     protected $fillable = ['title','content', 'user_id', 'category_id', 'path', 'tags'];
+     protected $fillable = ['title','content', 'user_id', 'category_id', 'path', 'tags', 'slug'];
 
      public function setPathAttribute($path){
 
