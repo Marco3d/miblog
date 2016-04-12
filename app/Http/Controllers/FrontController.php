@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Article;
+
+
 
 class FrontController extends Controller
 {
@@ -14,14 +17,29 @@ class FrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   
+
+    
     public function index()
+
     {
-        return view('index');
+        $articles = Article::OrderBy('id', 'DESC')->paginate(3);
+        return view('index',compact('articles'));
     }
 
      public function admin()
     {
         return view('admin.index');
+    }
+
+    public function article($slug)
+    {
+        $articles = Article::findBySlug($slug);
+       /* $articles->paginate();*/
+  
+        
+        return view('article',compact('articles'));
     }
 
     

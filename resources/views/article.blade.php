@@ -9,43 +9,41 @@
 		
 		<div class="col-md-8">
 			<h1>Últimas Noticias</h1>
-			@foreach($articles as $article)	
+			
 				<article>
-				<h2>{{$article->title}} </h2>
+				<h2>{{$articles->title}} </h2>
 
 					<div class="row">
 
 
 						<div class="col-md-6">
-							 <span class="glyphicon glyphicon-folder-open"></span> {{$article->category->name}}
-							 <span class="glyphicon glyphicon-user"></span>  {{$article->user->name}}
+							 <span class="glyphicon glyphicon-folder-open"></span> {{$articles->category->name}}
+							 <span class="glyphicon glyphicon-user"></span>  {{$articles->user->name}}
 						</div>	
 
 						<div class="col-md-6">
-
-							<span class="glyphicon glyphicon-calendar"></span>{{$article->created_at}}
+							<span class="glyphicon glyphicon-calendar"></span>{{$articles->created_at}}
 						</div>	
 
 					</div>
 
 					<br>
-					@if(empty($article->path))
-					@else
-					<img src="{{route('home')}}/images/{{$article->path}}" class="img-responsive">
+					@if(empty($articles->path))
+					@else	
+					<img src="{{route('home')}}/images/{{$articles->path}}" class="img-responsive">
 					@endif
 					<br>
 
-					<p> {{substr($article->content, 0,300)}}...</p>
 
-					<a class="btn btn-primary" href="{{'article'}}/{{$article->slug}}" role="button">Leer mas</a>
+					<p> {{($articles->content)}}</p>
+
+					
 				</article>
-			@endforeach()
-
-			{!! $articles->render()!!}
-
-
+				<button class="btn btn-primary" onclick="history.go(-1)">« Regresar </button>
 			
 		</div>
+
+
 
 		<div class="col-md-4">
 			<div class="panel panel-primary">

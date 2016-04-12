@@ -21,6 +21,13 @@ Route::get('/',[
 	'as'   => 'home'
 	]);
 
+Route::get('article/{slug}',[
+	'uses' => 'FrontController@article',
+	'as'   => 'article'
+	]);
+
+
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    
    Route::resource('users', 'UsersController');
