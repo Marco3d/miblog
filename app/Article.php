@@ -10,6 +10,7 @@ class Article extends Model implements SluggableInterface
         'build_from' => 'title',
         'save_to'    => 'slug',
     ];
+    
      protected $table = "articles";
     
      protected $fillable = ['title','content', 'user_id', 'category_id', 'path', 'tags', 'slug'];

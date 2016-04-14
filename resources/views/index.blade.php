@@ -23,7 +23,7 @@
 
 						<div class="col-md-6">
 
-							<span class="glyphicon glyphicon-calendar"></span>{{$article->created_at}}
+							<span class="glyphicon glyphicon-calendar"></span> {{Date::parse($article->created_at)->format('j \d\e F \d\e Y')}}
 						</div>	
 
 					</div>
